@@ -63,9 +63,13 @@ def load_a_annual_finance_reports(period=ReportPeriod.ANNUAL, rename_column=True
 
     df = pd.DataFrame()
 
-    fnames = [name for name in os.listdir(cfg.TdxCfg.cw) if period.value in name]
+    fnames = [
+        name
+        for name in os.listdir(cfg.ProcessedDataPath.tdx_cw)
+        if period.value in name
+    ]
     for name in fnames:
-        path = cfg.TdxCfg.cw + os.sep + name
+        path = cfg.ProcessedDataPath.tdx_cw + os.sep + name
         if os.path.getsize(path) == 0:
             continue
         tmp_df = pd.read_pickle(path, compression=None)
@@ -85,7 +89,9 @@ def load_gbbq():
     加载股本变迁csv
     return DataFrame
     """
-    df = pd.read_csv(cfg.TdxCfg.gbbq, encoding="utf-8", dtype={"code": str})
+    df = pd.read_csv(
+        cfg.ProcessedDataPath.tdx_gbbq, encoding="utf-8", dtype={"code": str}
+    )
     df["date"] = pd.to_datetime(df["权息日"], format="%Y%m%d")
     return df
 
@@ -96,7 +102,7 @@ def load_gbbq():
 #     返回dataframe
 #     """
 #     df = pd.read_csv(
-#         cfg.TdxCfg.lday_qfq + os.sep + share + ".csv",
+#         cfg.ProcessedDataPath.tdx_lday_qfq + os.sep + share + ".csv",
 #         index_col=None,
 #         encoding="gbk",
 #         dtype={"code": str},
@@ -108,7 +114,7 @@ def load_gbbq():
 
 def load_line_day(code="000001"):
     """加载股票日线"""
-    path = cfg.TdxCfg.lday_qfq + os.sep + code + ".csv"
+    path = cfg.ProcessedDataPath.tdx_lday_qfq + os.sep + code + ".csv"
     if not os.path.exists(path):
         print(f"code={code} 日线数据文件不存在")
         return pd.DataFrame()

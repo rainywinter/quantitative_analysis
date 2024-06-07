@@ -258,8 +258,12 @@ def backward_adjust(lday_path="", df_gbbq=pd.DataFrame):
             df_dst = df_proceed.append(df_dst)
         df_dst.reset_index(drop=False, inplace=True)
 
-        df_dst.to_csv(cfg.TdxCfg.lday_qfq + os.sep + filename, encoding="utf-8")
-        df_dst.to_pickle(cfg.TdxCfg.pickle + os.sep + filename[:-4] + ".pkl")
+        df_dst.to_csv(
+            cfg.ProcessedDataPath.tdx_lday_qfq + os.sep + filename, encoding="utf-8"
+        )
+        df_dst.to_pickle(
+            cfg.ProcessedDataPath.tdx_pickle + os.sep + filename[:-4] + ".pkl"
+        )
         # return
 
 
@@ -391,7 +395,7 @@ def load_cw_dat(path):
 
 
 if __name__ == "__main__":
-    # gbbq_to_csv(cfg.TdxCfg.ori_gbbq, "gbbq.csv")
+    gbbq_to_csv(cfg.TdxCfg.ori_gbbq, cfg.ProcessedDataPath.tdx_gbbq + "1")
 
     # content = str(download(cfg.TdxCfg.gpcw_url)).strip()
     # print(content)
@@ -413,5 +417,5 @@ if __name__ == "__main__":
     # df = load_cw_dat(path)
 
     # print(df)
-    df = load_data.load_gbbq()
-    backward_adjust(cfg.TdxCfg.lday_qfq, df)
+    # df = load_data.load_gbbq()
+    # backward_adjust(cfg.ProcessedDataPath.tdx_lday_qfq, df)

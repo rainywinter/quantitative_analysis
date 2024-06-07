@@ -33,13 +33,13 @@ class ProcessedDataPath:
     # 原始通达信前复权后csv格式的日线数据目录（单只股票单个文件保存，文件名为股票代码）
     tdx_lday_qfq = processed_data_root_path + os.sep + "processed_tdx_lday_qfq"
     # pickle格式日线数据保存目录
-    tdx_pickle = tdx_root_path + os.sep + "processed_pickle"
+    tdx_pickle = processed_data_root_path + os.sep + "processed_tdx_lday_qfq_pickle"
     # csv格式指数日线目录
-    tdx_index = tdx_root_path + os.sep + "processed_index"
+    tdx_index = processed_data_root_path + os.sep + "processed_tdx_index"
     # 专业财务保存目录
-    tdx_cw = tdx_root_path + os.sep + "processed_cw"
+    tdx_cw = processed_data_root_path + os.sep + "processed_tdx_cw"
     # 股本变迁保存目录
-    tdx_gbbq = tdx_root_path + os.sep + "processed_gbbq.csv"
+    tdx_gbbq = processed_data_root_path + os.sep + "processed_tdx_gbbq.csv"
 
 
 # 指定通达信数据目录
@@ -64,17 +64,17 @@ class TdxCfg:
     # 通达信原始财务数据
     ori_cw = tdx_root_path + os.sep + "vipdoc/cw"
     # 前复权后csv格式的日线数据目录（单只股票单个文件保存，文件名为股票代码）
-    lday_qfq = tdx_root_path + os.sep + "lday_qfq"
+    # lday_qfq = tdx_root_path + os.sep + "lday_qfq"
     # pickle格式日线数据保存目录
-    pickle = tdx_root_path + os.sep + "pickle"
+    # pickle = tdx_root_path + os.sep + "pickle"
     # csv格式指数日线目录
-    index = tdx_root_path + os.sep + "index"
+    # index = tdx_root_path + os.sep + "index"
     # 专业财务保存目录
-    cw = tdx_root_path + os.sep + "cw"
+    # cw = tdx_root_path + os.sep + "cw"
     # 通达信原始股本变迁
     ori_gbbq = tdx_root_path + os.sep + "/T0002/hq_cache/gbbq"
     # 股本变迁保存目录
-    gbbq = tdx_root_path + os.sep + "gbbq.csv"
+    # gbbq = tdx_root_path + os.sep + "gbbq.csv"
     # 通达信正常交易状态的股票列表
     normal_shares = tdx_root_path + os.sep + "/T0002/hq_cache/infoharbor_ex.code"
     # 通达信服务器IP, 从通达信软件服务器列表中选一个最快的即可
@@ -91,10 +91,10 @@ if __name__ == "__main__":
     # pre check and mkdir
     paths = [
         tdx_root_path,
-        TdxCfg.cw,
-        TdxCfg.lday_qfq,
-        TdxCfg.index,
-        TdxCfg.pickle,
+        ProcessedDataPath.tdx_cw,
+        ProcessedDataPath.tdx_lday_qfq,
+        ProcessedDataPath.tdx_index,
+        ProcessedDataPath.tdx_pickle,
     ]
     for p in paths:
         if not os.path.exists(p):

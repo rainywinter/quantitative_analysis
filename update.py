@@ -32,7 +32,9 @@ def update_a_shares():
     df.set_index("code", drop=True, inplace=True)
     # 加上上市日期
     lt = []
-    for filename in tqdm(os.listdir(cfg.TdxCfg.lday_qfq), desc="query ipo date"):
+    for filename in tqdm(
+        os.listdir(cfg.ProcessedDataPath.tdx_lday_qfq), desc="query ipo date"
+    ):
         code = filename[:-4]
         df_lday = load_data.load_line_day(code)
         if df_lday.empty:
@@ -104,12 +106,12 @@ def update_tdx_cw():
         ) as file:
             file.extractall(cfg.TdxCfg.ori_cw)
     # convert  all to pkl
-    pkl_files = [name[:-4] for name in os.listdir(cfg.TdxCfg.cw)]
+    pkl_files = [name[:-4] for name in os.listdir(cfg.ProcessedDataPath.tdx_cw)]
     for filename in tqdm(
         set(zip_files).difference(set(pkl_files)), desc="convert to pkl:"
     ):
         ori_dat_path = cfg.TdxCfg.ori_cw + os.sep + filename + ".dat"
-        dst_pkl_path = cfg.TdxCfg.cw + os.sep + filename + ".pkl"
+        dst_pkl_path = cfg.ProcessedDataPath.tdx_cw + os.sep + filename + ".pkl"
         df = tdx_data_func.load_cw_dat(ori_dat_path)
         df.to_pickle(dst_pkl_path, compression=None)
 
@@ -148,7 +150,7 @@ def update_tdx_lday():
         df_shares[0].str.startswith("8") | df_shares[0].str.startswith("43")
     ]
     """
-    dst = cfg.TdxCfg.lday_qfq
+    dst = cfg.ProcessedDataPath.tdx_lday_qfq
 
     log.i("导出深市日线")
     names = [
@@ -174,11 +176,15 @@ def update_tdx_lday():
     for name in tqdm(cfg.index_list, desc="index lday"):
         if name.startswith("sh"):
             tdx_data_func.lday_to_csv(
-                src=cfg.TdxCfg.ori_lday_sh, dst=cfg.TdxCfg.index, file_name=name
+                src=cfg.TdxCfg.ori_lday_sh,
+                dst=cfg.ProcessedDataPath.tdx_index,
+                file_name=name,
             )
         elif name.startswith("sz"):
             tdx_data_func.lday_to_csv(
-                src=cfg.TdxCfg.ori_lday_sz, dst=cfg.TdxCfg.index, file_name=name
+                src=cfg.TdxCfg.ori_lday_sz,
+                dst=cfg.ProcessedDataPath.tdx_index,
+                file_name=name,
             )
 
     # 暂时忽略北交所
@@ -188,7 +194,7 @@ def update_tdx_lday():
     start = time.time()
     log.i("前复权:start")
     df_gbbq = load_data.load_gbbq()
-    tdx_data_func.backward_adjust(cfg.TdxCfg.lday_qfq, df_gbbq=df_gbbq)
+    tdx_data_func.backward_adjust(cfg.ProcessedDataPath.tdx_lday_qfq, df_gbbq=df_gbbq)
     log.i(f"前复权:end,用时{(time.time() - start):.2f}秒")
 
 

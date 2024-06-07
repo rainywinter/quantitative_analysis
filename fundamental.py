@@ -245,7 +245,7 @@ if __name__ == "__main__":
     # calc_avg_book_value_grow()
     # raise Exception("test")
 
-    codes = [name[:-4] for name in os.listdir(cfg.TdxCfg.lday_qfq)]
+    codes = [name[:-4] for name in os.listdir(cfg.ProcessedDataPath.tdx_lday_qfq)]
     codes.sort()
     index = codes.index(load_data.dt_a_share_names["伊利股份"])
 
