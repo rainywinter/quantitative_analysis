@@ -37,16 +37,20 @@ def core_indicator_calc(df=pd.DataFrame):
     # 战略发展的支撑 指标
     df["有息负债"] = (
         df["短期借款"]
+        + df["一年内到期的非流动负债"]
         + df["交易性金融负债"]
         + df["长期借款"]
         + df["应付债券"]
-        + df["长期应付款"]
     )
     df["经营性负债"] = (
-        df["应付票据"] + df["应付账款"] + df["预收款项"] + df["合同负债"] * 10000
+        df["应付票据"]
+        + df["应付账款"]
+        + df["长期应付款"]
+        + df["预收款项"]
+        + df["合同负债"] * 10000
     )
-    df["股东入资"] = df["股本"]
-    df["利润积累"] = df["资本公积"] + df["盈余公积"] + df["未分配利润"]
+    df["股东入资"] = df["股本"] + df["资本公积"]
+    df["利润积累"] = df["盈余公积"] + df["未分配利润"]
 
     return df
 
@@ -65,10 +69,13 @@ def core_indicator_plot(code="000001", to_web=False, df_gbbq=pd.DataFrame):
         by="date", ascending=True
     )
 
+    if df_gbbq is None or df_gbbq.empty:
+        df_gbbq = load_data.load_gbbq()
+
     # 分红数据
     df_gbbq.rename(columns={"分红-前流通盘": "dividend"}, inplace=True)
     df_dividend = df_gbbq[(df_gbbq["code"] == code) & (df_gbbq["类别"] == "除权除息")]
-    df_dividend.loc[:, ["year"]] = pd.DatetimeIndex(df_dividend["date"]).year
+    df_dividend.loc[:, ["year"]] = pd.DatetimeIndex(df_dividend["date"]).year - 1
     df_dividend = df_dividend[["year", "dividend"]]
     # groupby 后自动设置index
     df_dividend = df_dividend.groupby("year").sum() / 10
@@ -116,7 +123,7 @@ def core_indicator_plot(code="000001", to_web=False, df_gbbq=pd.DataFrame):
         ["净利润", "经营活动产生的现金流量净额", "核心利润", "应收款项"],
         # ["信用减值损失", "信用减值损失2018", "信用减值损失2019", "商誉"],
         "核心利润获现率",
-        ["应收帐款周转率", "应收帐款周转天数"],
+        ["存货周转率", "固定资产周转率", "总资产周转率"],
         ["净资产收益率", "销售毛利率", "销售净利率"],
         ["营业收入增长率", "净利润增长率"],
         ["有息负债", "经营性负债", "股东入资", "利润积累"],
@@ -240,7 +247,7 @@ if __name__ == "__main__":
 
     codes = [name[:-4] for name in os.listdir(cfg.TdxCfg.lday_qfq)]
     codes.sort()
-    index = codes.index(load_data.dt_a_share_names["双汇发展"])
+    index = codes.index(load_data.dt_a_share_names["伊利股份"])
 
     record = False
     if len(sys.argv) > 1 and sys.argv[1] == "lastest":

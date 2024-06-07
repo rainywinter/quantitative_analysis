@@ -18,6 +18,30 @@ index_list = [
 ]
 
 
+processed_data_root_path = (
+    "/Users/yc/Documents/code/stock/share_fundamental_analysis/data"
+)
+
+
+class ProcessedDataPath:
+    """
+    存储本软件加工后的数据：包括从通达信解析、互联网下载、自定义分析结果
+    """
+
+    # 数据根目录
+    root_path = processed_data_root_path
+    # 原始通达信前复权后csv格式的日线数据目录（单只股票单个文件保存，文件名为股票代码）
+    tdx_lday_qfq = processed_data_root_path + os.sep + "processed_tdx_lday_qfq"
+    # pickle格式日线数据保存目录
+    tdx_pickle = tdx_root_path + os.sep + "processed_pickle"
+    # csv格式指数日线目录
+    tdx_index = tdx_root_path + os.sep + "processed_index"
+    # 专业财务保存目录
+    tdx_cw = tdx_root_path + os.sep + "processed_cw"
+    # 股本变迁保存目录
+    tdx_gbbq = tdx_root_path + os.sep + "processed_gbbq.csv"
+
+
 # 指定通达信数据目录
 tdx_root_path = "/Users/yc/Documents/code/stock/share_fundamental_analysis/data"
 # tdx_root_path = "/Users/yc/Documents/code/stock/tdx_data"
