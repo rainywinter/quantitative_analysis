@@ -25,7 +25,7 @@ def root():
 def hello(code):
     print("query code:", code)
     if code not in load_data.dt_a_share_codes:
-        if name not in load_data.dt_a_share_names:
+        if code not in load_data.dt_a_share_names:
             return "股票代码错误"
         code = load_data.dt_a_share_names[code]
     fig = fundamental.core_indicator_plot(code, to_web=True)

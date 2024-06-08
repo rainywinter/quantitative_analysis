@@ -121,11 +121,16 @@ def core_indicator_plot(code="000001", to_web=False, df_gbbq=pd.DataFrame):
         "营业收入",
         ["每股净资产", "每股分红*10", "基本每股收益*10"],
         ["净利润", "经营活动产生的现金流量净额", "核心利润", "应收款项"],
-        # ["信用减值损失", "信用减值损失2018", "信用减值损失2019", "商誉"],
+        ["信用减值损失", "信用减值损失2018", "信用减值损失2019", "商誉"],
         "核心利润获现率",
-        ["存货周转率", "固定资产周转率", "总资产周转率"],
-        ["净资产收益率", "销售毛利率", "销售净利率"],
-        ["营业收入增长率", "净利润增长率"],
+        # ["存货周转率", "固定资产周转率", "总资产周转率"],
+        [
+            "净资产收益率",
+            "销售毛利率",
+            "销售净利率",
+            "财务费用率",
+        ],
+        # ["营业收入增长率", "净利润增长率"],
         ["有息负债", "经营性负债", "股东入资", "利润积累"],
     ]
     rows = math.ceil(len(indicators) / cols)
@@ -134,7 +139,8 @@ def core_indicator_plot(code="000001", to_web=False, df_gbbq=pd.DataFrame):
     for i in indicators:
         ax = fig.add_subplot(rows, cols, count)
         if type(i) == list:
-            ax.set_title("-".join(i))
+            # ax.set_title("-".join(i))
+            ax.set_title(i[0])
             ax.plot(df["date"], df[i], marker=marker)
             ax.legend(i, loc="best")
         else:
@@ -247,7 +253,7 @@ if __name__ == "__main__":
 
     codes = [name[:-4] for name in os.listdir(cfg.ProcessedDataPath.tdx_lday_qfq)]
     codes.sort()
-    index = codes.index(load_data.dt_a_share_names["伊利股份"])
+    index = codes.index(load_data.dt_a_share_names["楚天高速"])
 
     record = False
     if len(sys.argv) > 1 and sys.argv[1] == "lastest":
