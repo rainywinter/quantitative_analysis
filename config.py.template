@@ -8,9 +8,7 @@ a_share_path processed_data_root_path tdx_root_path
 
 import os
 
-a_share_path = (
-    "/Users/yc/Documents/code/stock/share_fundamental_analysis/data/a_share.csv"
-)
+a_share_path = "/Users/yc/Documents/code/stock/quantitative_analysis/data/a_share.csv"
 
 
 # 通达信需要转换的指数文件。通达信按998查看重要指数
@@ -21,9 +19,8 @@ index_list = [
 ]
 
 
-processed_data_root_path = (
-    "/Users/yc/Documents/code/stock/share_fundamental_analysis/data"
-)
+# 本软件生成数据存储路径
+processed_data_root_path = "/Users/yc/Documents/code/stock/quantitative_analysis/data"
 
 
 class ProcessedDataPath:
@@ -46,8 +43,7 @@ class ProcessedDataPath:
 
 
 # 指定通达信数据目录
-tdx_root_path = "/Users/yc/Documents/code/stock/share_fundamental_analysis/data"
-# tdx_root_path = "/Users/yc/Documents/code/stock/tdx_data"
+tdx_root_path = "/Users/yc/Documents/code/stock/quantitative_analysis/data"
 
 
 class TdxCfg:

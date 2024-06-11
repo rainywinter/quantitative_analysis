@@ -395,27 +395,4 @@ def load_cw_dat(path):
 
 
 if __name__ == "__main__":
-    gbbq_to_csv(cfg.TdxCfg.ori_gbbq, cfg.ProcessedDataPath.tdx_gbbq + "1")
-
-    # content = str(download(cfg.TdxCfg.gpcw_url)).strip()
-    # print(content)
-    # with open("gpcw.txt", "w") as f:
-    #     f.write(content)
-
-    # with open(
-    #     "/Users/yc/Documents/code/stock/share_fundamental_analysis/gpcw.txt", "r"
-    # ) as f:
-    #     content = str(f.read())
-
-    # _, content = download(cfg.TdxCfg.gpcw_url)
-    # lines = content.split("\r\n")
-    # data = [l.strip().split(",") for l in lines]
-    # df = pd.DataFrame(data, columns=["filename", "md5", "filesize"])
-    # print(df)
-
-    # path = cfg.TdxCfg.ori_cw + "/gpcw20220331.dat"
-    # df = load_cw_dat(path)
-
-    # print(df)
-    # df = load_data.load_gbbq()
-    # backward_adjust(cfg.ProcessedDataPath.tdx_lday_qfq, df)
+    gbbq_to_csv(cfg.TdxCfg.ori_gbbq, cfg.ProcessedDataPath.tdx_gbbq)

@@ -19,3 +19,4 @@ pip install {packagename} -i http://mirrors.aliyun.com/pypi/simple/ --trusted-ho
 - 配置config.py, a_share_path processed_data_root_path tdx_root_path
 - 执行 python config.py
 - 执行 python update.py
+- 执行 python tdx_data_func.py
