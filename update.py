@@ -203,7 +203,7 @@ if __name__ == "__main__":
     func_list = []
     if len(sys.argv) > 1:
         if sys.argv[1] == "all":
-            func_list = [update_a_shares, update_tdx_cw, update_tdx_lday]
+            func_list = [update_tdx_cw, update_tdx_lday, update_a_shares]
         elif sys.argv[1] == "shares":
             func_list = [update_a_shares]
         elif sys.argv[1] == "cw":

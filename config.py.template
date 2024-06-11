@@ -1,6 +1,9 @@
 """
 项目运行所需配置文件
 首先执行本文件以创建必须的目录
+
+仅需配置这三个路径
+a_share_path processed_data_root_path tdx_root_path
 """
 
 import os

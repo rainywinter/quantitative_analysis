@@ -127,17 +127,17 @@ def core_indicator_plot(code="000001", to_web=False, df_gbbq=pd.DataFrame):
         "营业收入",
         ["净利润", "经营活动产生的现金流量净额", "核心利润", "应收款项"],
         [
-            "合同负债",
             "应付票据",
             "应付账款",
-            "预收款项",
-        ],
-        [
             "预付款项",
+        ],  # 付款
+        [
+            "预收款项",
+            "合同负债",
             "应收账款",
             "应收款项融资",
             "应收票据",
-        ],
+        ],  # 收款
         ["每股净资产", "每股分红*10", "基本每股收益*10"],
         ["信用减值损失", "信用减值损失2018", "信用减值损失2019", "商誉"],
         "核心利润获现率",
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
     codes = [name[:-4] for name in os.listdir(cfg.ProcessedDataPath.tdx_lday_qfq)]
     codes.sort()
-    index = codes.index(load_data.dt_a_share_names["楚天高速"])
+    index = codes.index(load_data.dt_a_share_names["伊利股份"])
 
     record = False
     if len(sys.argv) > 1 and sys.argv[1] == "lastest":
