@@ -5,5 +5,5 @@ data/
 a_share.csv
 gbbq.csv
 gpcw.txt
-test*.py
+test*
 config.py
