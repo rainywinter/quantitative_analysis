@@ -182,7 +182,10 @@ def calc_avg_book_value_grow():
     """
     计算上市以来净资产增长
     """
-    df_group = df_core_indicator.groupby("code")
+    # 2010年来
+    begin = "2010-12-31"
+    df_finance = df_core_indicator[df_core_indicator["date"] >= begin]
+    df_group = df_finance.groupby("code")
     # 2019年6月注册制 pass
     milestone = pd.Timestamp("2019-06-01")
 
@@ -241,7 +244,7 @@ def calc_avg_book_value_grow():
     df_grow = pd.DataFrame.from_dict(data)
     df_grow.sort_values(by="rate", ascending=False, inplace=True)
     df_grow.to_csv(
-        cfg.TdxCfg.root_path + os.sep + "boo_rate_grow.csv",
+        cfg.TdxCfg.root_path + os.sep + "book_rate_grow.csv",
         encoding="utf-8",
         index=False,
     )

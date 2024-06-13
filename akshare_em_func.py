@@ -7,7 +7,7 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def all_industry():
+def save_all_industry():
     """
     全部行业板块名称及板块代码
     保存csv
@@ -18,7 +18,7 @@ def all_industry():
     df.to_csv("data/em_industry.csv", encoding="utf-8", index=False)
 
 
-def industry_elements():
+def save_industry_elements():
     """
     全部股票代码 名称 行业名称
     保存csv
@@ -34,6 +34,7 @@ def industry_elements():
         df_elements = pd.concat([df_elements, df_tmp], axis=0)
 
     df_elements.sort_values(by="代码")
+    df_elements.columns = ["code", "name", "industry"]
     df_elements.to_csv("data/em_industry_element.csv", encoding="utf-8", index=False)
 
 
@@ -43,5 +44,5 @@ def share_base_info(code="000001"):
 
 
 if __name__ == "__main__":
-    # all_industry()
-    industry_elements()
+    # save_all_industry()
+    save_industry_elements()
